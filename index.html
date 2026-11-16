@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Anniversary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,400&family=Poppins:wght@400;500;600;700&family=Dancing+Script:wght@600&family=Cinzel:wght@600&family=Caveat:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at center, #f0f9ff, #0284c7, #0c4a6e);
+            overflow: hidden;
+            height: 100vh;
+            touch-action: manipulation;
+        }
+
+        .font-cursive { font-family: 'Great Vibes', cursive; }
+        .font-serif-custom { font-family: 'Playfair Display', serif; }
+        .font-padauk { font-family: 'Padauk', sans-serif; }
+
+        @keyframes floatDownToCenter {
+            0% { transform: translate(-50%, -100vh) rotate(-12deg); opacity: 0; }
+            20% { opacity: 1; }
+            35% { transform: translate(-35%, -15vh) rotate(8deg); }
+            65% { transform: translate(-60%, 10vh) rotate(-6deg); }
+            85% { transform: translate(-45%, 22vh) rotate(4deg); }
+            100% { transform: translate(-50%, 25vh) rotate(-2deg); }
+        }
+
+        @keyframes centerSwaying {
+            0%, 100% { transform: translate(-50%, 25vh) rotate(-2deg) scale(1); }
+            50% { transform: translate(-50%, 21vh) rotate(2deg) scale(1.03); }
+        }
+
+        @keyframes bouquetGentleSway {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-4px) rotate(1.5deg) scale(1.02); }
+        }
+
+        .bouquet-sway {
+            animation: bouquetGentleSway 3.5s ease-in-out infinite;
+        }
+
+        .free-floating-image {
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            animation: floatDownToCenter 6s cubic-bezier(0.25, 1, 0.5, 1) forwards,
+                       centerSwaying 4s ease-in-out infinite 6s;
+            cursor: pointer;
+            transition: filter 0.3s ease, transform 0.5s ease;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        .free-floating-image img {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+            width: 160px !important;
+        }
+
+        .free-floating-image:hover img {
+            filter: drop-shadow(0 0 18px rgba(125, 211, 252, 0.9));
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.8; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        .click-hint { animation: pulseGlow 1.8s infinite; }
+
+        /* Sky Blue Theme Envelope Paper Style */
+        .paper-skyblue {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            color: #0c4a6e;
+            border: 2px solid #7dd3fc;
+            box-shadow: 0 15px 35px rgba(14, 165, 233, 0.25);
+        }
+        .paper-skyblue .title-text { color: #0284c7; }
+        .paper-skyblue .heading-text { color: #0369a1; }
+
+        .paperclip {
+            position: absolute; top: 10px; right: 24px;
+            width: 14px; height: 42px; border: 2px solid #38bdf8;
+            border-radius: 10px; box-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+            z-index: 30; pointer-events: none;
+        }
+        .paperclip::after {
+            content: ''; position: absolute; top: 6px; left: 2px;
+            width: 6px; height: 26px; border: 2px solid #38bdf8; border-radius: 6px;
+        }
+
+        .sparkle {
+            position: absolute;
+            background: radial-gradient(circle, #ffffff 10%, rgba(186, 230, 253, 0.9) 60%, transparent 100%);
+            border-radius: 50%; pointer-events: none;
+            animation: floatUp var(--duration) linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(105vh) scale(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.85; }
+            80% { opacity: 0.85; }
+            100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; }
+        }
+
+        .blurred-content { filter: blur(6px); pointer-events: none; transition: filter 0.5s ease; }
+
+        /* Typing cursor effect */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 0.7s infinite;
+            color: #0284c7;
+            font-weight: bold;
+            margin-left: 2px;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="relative flex items-center justify-center min-h-screen select-none overflow-hidden font-serif-custom">
+
+    <audio id="bgMusic" loop src="https://www.image2url.com/r2/default/audio/1789288232634-9a89e91e-e43f-4d68-b101-bf9b607f0f76.m4a"></audio>
+
+    <div id="startScreen" class="absolute inset-0 z-40 flex flex-col items-center justify-center cursor-pointer transition-opacity duration-700" onclick="startExperience()">
+        <h1 class="text-sky-100 text-lg md:text-xl font-bold tracking-wide drop-shadow-md mb-6 click-hint text-center px-4">
+            ✨ Click the bouquet ✨
+        </h1>
+        <img src="https://i.ibb.co/zHSrxp8G/blue-Sticker-bouquet-removebg-preview.png" alt="Bouquet" class="h-auto object-contain hover:scale-105 transition-transform duration-300 bouquet-sway" style="width: 180px;">
+    </div>
+
+    <div id="mainContent" class="hidden w-full h-full transition-all duration-500">
+        <div id="sparkle-container" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
+        <div class="absolute w-80 h-80 bg-sky-400/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute w-72 h-72 bg-cyan-300/20 rounded-full blur-3xl pointer-events-none -top-10 -left-10"></div>
+
+        <div class="absolute top-8 text-center z-10 px-4 w-full">
+            <h1 class="text-sky-100 text-base md:text-lg font-bold tracking-wide drop-shadow-md">✨ Tap The Envelope ✨</h1>
+            <p class="text-xs text-sky-200/80 mt-1">Tap the floating envelope to open wish</p>
+        </div>
+
+        <div id="fallingCard" class="free-floating-image z-20 flex flex-col items-center justify-center" onclick="openWishCard()">
+            <img src="https://i.ibb.co/xK7Lfv0H/Untitled-Design-1-removebg-preview.png" alt="Special" class="h-auto object-contain pointer-events-auto bg-transparent border-0 outline-0 shadow-none bouquet-sway" style="width: 160px;">
+            <span class="click-hint mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-400 text-slate-900 font-bold text-xs tracking-wider shadow-lg border border-sky-200">
+                <svg class="w-3.5 h-3.5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
+                Click Me ✨
+            </span>
+        </div>
+    </div>
+
+    <!-- Modal background -->
+    <div id="wishModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-[2px] opacity-0 pointer-events-none transition-opacity duration-500 overflow-y-auto" onclick="closeWishCardOnBg(event)">
+        <div class="paper-skyblue relative w-full max-w-md p-6 sm:p-8 rounded-xl z-10 shadow-2xl transform scale-90 transition-transform duration-500 my-auto" id="modalCard">
+            <div class="paperclip"></div>
+            <div class="text-center mb-4 pt-3">
+                <span id="titleText" class="text-3xl sm:text-4xl title-text block font-cursive min-h-[48px]"></span>
+                <div class="w-20 h-0.5 bg-sky-500/30 mx-auto mt-2"></div>
+            </div>
+            <div class="space-y-3 text-center leading-relaxed my-4 font-padauk">
+                <p id="headingText" class="text-lg sm:text-xl font-bold heading-text drop-shadow-sm min-h-[28px]"></p>
+                <p id="bodyText" class="text-sm sm:text-base font-medium px-2 opacity-95 min-h-[80px]"></p>             
+                <p id="subText" class="text-xs sm:text-sm italic pt-1 opacity-80 min-h-[24px]"></p>
+            </div>
+            <div class="mt-6 pt-3 border-t border-sky-300/40 flex items-center justify-between text-xs">
+                <span id="footerLeft" class="font-cursive text-base text-sky-800"></span>
+                <span id="footerRight" class="text-sky-700"></span>
+            </div>
+            <div onclick="openCornerFullModal(event)" class="absolute bottom-3 right-3 cursor-pointer group z-30">
+                <div class="w-11 h-11 p-0.5 bg-white shadow-md rounded border border-sky-300 transform rotate-3 group-hover:rotate-0 transition duration-200">
+                    <img src="https://i.ibb.co/cp6WytW/download-55.jpg" class="w-full h-full object-cover rounded-sm">
+                </div>
+            </div>
+            <button onclick="closeWishCard()" class="absolute top-3 right-3 z-30 bg-sky-600 text-white rounded-full p-1.5 shadow-md hover:bg-sky-700 transition-colors focus:outline-none">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <div id="exportCornerModal" class="hidden fixed inset-0 z-[100] bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 cursor-pointer" onclick="closeExportCornerModal()">
+        <div class="bg-white p-3.5 rounded-2xl shadow-2xl max-w-xs w-full text-center relative border border-sky-200" onclick="event.stopPropagation()">
+            <img src="https://i.ibb.co/cp6WytW/download-55.jpg" class="w-full h-auto max-h-80 object-contain rounded-xl">
+            <p class="text-xs text-slate-700 font-semibold mt-2.5">✨ Corner Memory Stamp ✨</p>
+            <button onclick="closeExportCornerModal()" class="absolute -top-3 -right-3 bg-sky-600 text-white rounded-full p-1.5 shadow-lg hover:bg-sky-700 transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Data to type out
+        const textData = {
+            title: "Happy Anniversary",
+            heading: "💎 Happy Anniversary, My Love! 💙",
+            body: "ငါတို့နှစ်ယောက် အတူတူဖြတ်သန်းလာခဲ့တဲ့ အချိန်တွေအတွက် ကျေးဇူးအများကြီးတင်ပါတယ်။ အမြဲတမ်းနားလည်ပေးပြီး ချစ်ပေးလို့လည်း ကျေးဇူးပါ။ 💖\nရှေ့လျောက်လည်း အနားမှာ အမြဲရှိပေးပါရစေနော်\nအများကြီးဆက်ချစ်ပေးမယ်လို့ ကတိပေးပါတယ်နော်",
+            sub: "May our love continue to grow stronger with each passing day! ✨",
+            footerLeft: "With All My Love 💙",
+            footerRight: "✨ Forever & Always ✨"
+        };
+
+        let typingTimeouts = [];
+
+        function clearAllTyping() {
+            typingTimeouts.forEach(t => clearTimeout(t));
+            typingTimeouts = [];
+        }
+
+        function typeWriter(elementId, text, speed, callback) {
+            const el = document.getElementById(elementId);
+            el.innerHTML = "";
+            el.classList.add('typing-cursor');
+            let i = 0;
+
+            function typeNextChar() {
+                if (i < text.length) {
+                    if (text.charAt(i) === '\n') {
+                        el.innerHTML += '<br>';
+                    } else {
+                        el.innerHTML += text.charAt(i);
+                    }
+                    i++;
+                    const timeout = setTimeout(typeNextChar, speed);
+                    typingTimeouts.push(timeout);
+                } else {
+                    el.classList.remove('typing-cursor');
+                    if (callback) callback();
+                }
+            }
+
+            typeNextChar();
+        }
+
+        function startTypingSequence() {
+            clearAllTyping();
+            
+            // Clear content
+            document.getElementById('titleText').innerHTML = "";
+            document.getElementById('headingText').innerHTML = "";
+            document.getElementById('bodyText').innerHTML = "";
+            document.getElementById('subText').innerHTML = "";
+            document.getElementById('footerLeft').innerHTML = "";
+            document.getElementById('footerRight').innerHTML = "";
+
+            // Start typing chain
+            typeWriter('titleText', textData.title, 60, () => {
+                typeWriter('headingText', textData.heading, 40, () => {
+                    typeWriter('bodyText', textData.body, 35, () => {
+                        typeWriter('subText', textData.sub, 30, () => {
+                            document.getElementById('footerLeft').innerHTML = textData.footerLeft;
+                            document.getElementById('footerRight').innerHTML = textData.footerRight;
+                        });
+                    });
+                });
+            });
+        }
+
+        function startExperience() {
+            const audio = document.getElementById('bgMusic');
+            if (audio.src && audio.src !== window.location.href) {
+                audio.play().catch(err => console.log("Audio play error", err));
+            }
+            const startScreen = document.getElementById('startScreen');
+            const mainContent = document.getElementById('mainContent');
+            startScreen.classList.add('opacity-0');
+            setTimeout(() => {
+                startScreen.style.display = 'none';
+                mainContent.classList.remove('hidden');
+                createSparkles();
+            }, 700);
+        }
+
+        function createSparkles() {
+            const container = document.getElementById('sparkle-container');
+            if (!container) return;
+            for (let i = 0; i < 35; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                const size = Math.random() * 6 + 3;
+                sparkle.style.width = `${size}px`;
+                sparkle.style.height = `${size}px`;
+                sparkle.style.left = `${Math.random() * 100}%`;
+                sparkle.style.setProperty('--duration', `${Math.random() * 6 + 6}s`);
+                sparkle.style.animationDelay = `${Math.random() * 5}s`;
+                container.appendChild(sparkle);
+            }
+        }
+
+        function openWishCard() {
+            const modal = document.getElementById('wishModal');
+            const modalCard = document.getElementById('modalCard');
+            const mainContent = document.getElementById('mainContent');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100', 'pointer-events-auto');
+            modalCard.classList.remove('scale-90');
+            modalCard.classList.add('scale-100');
+            mainContent.classList.add('blurred-content');
+
+            // Trigger typing effect when opening
+            startTypingSequence();
+        }
+
+        function closeWishCard() {
+            const modal = document.getElementById('wishModal');
+            const modalCard = document.getElementById('modalCard');
+            const mainContent = document.getElementById('mainContent');
+            modal.classList.remove('opacity-100', 'pointer-events-auto');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalCard.classList.remove('scale-100');
+            modalCard.classList.add('scale-90');
+            mainContent.classList.remove('blurred-content');
+            closeExportCornerModal();
+            clearAllTyping();
+        }
+
+        function closeWishCardOnBg(e) {
+            if (e.target.id === 'wishModal') closeWishCard();
+        }
+
+        function openCornerFullModal(e) {
+            if(e) e.stopPropagation();
+            document.getElementById('exportCornerModal').classList.remove('hidden');
+        }
+
+        function closeExportCornerModal() {
+            document.getElementById('exportCornerModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
